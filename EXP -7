@@ -1,0 +1,49 @@
+import React, { useState } from "react";
+
+function App() {
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [birthdays, setBirthdays] = useState([]);
+
+  const addBirthday = () => {
+    if (name && date) {
+      setBirthdays([...birthdays, { name, date }]);
+      setName("");
+      setDate("");
+    }
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>🎂 Birthday Reminder</h2>
+
+      <input
+        type="text"
+        placeholder="Enter name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <br /><br />
+
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <br /><br />
+
+      <button onClick={addBirthday}>Add Reminder</button>
+
+      <h3 style={{ marginTop: "30px" }}>Upcoming Birthdays</h3>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {birthdays.map((b, i) => (
+          <li key={i}>
+            {b.name} — {b.date}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
