@@ -1,0 +1,32 @@
+import React, { useState } from "react";
+
+function App() {
+  const [candidates, setCandidates] = useState([
+    { name: "Alice", votes: 0 },
+    { name: "Bob", votes: 0 },
+    { name: "Charlie", votes: 0 },
+  ]);
+
+  const handleVote = (index) => {
+    const updated = candidates.map((c, i) =>
+      i === index ? { ...c, votes: c.votes + 1 } : c
+    );
+    setCandidates(updated);
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>Simple Voting App 🗳️</h2>
+      {candidates.map((c, i) => (
+        <div key={i} style={{ margin: "10px" }}>
+          <p>
+            {c.name}: {c.votes} votes
+          </p>
+          <button onClick={() => handleVote(i)}>Vote</button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
